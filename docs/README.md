@@ -22,6 +22,7 @@ If code and documentation disagree, do not silently edit the requirement to matc
 
 ## Engineering
 - [Stack](engineering/STACK.md)
+- [Repository structure](engineering/STRUCTURE.md)
 - [Sensing pipeline](engineering/SENSING_PIPELINE.md)
 - [Data and protocol contracts](engineering/DATA_AND_PROTOCOL.md)
 - [Experimentation](engineering/EXPERIMENTATION.md)
@@ -30,12 +31,28 @@ If code and documentation disagree, do not silently edit the requirement to matc
 ## Quality
 - [Test strategy](quality/TEST_STRATEGY.md)
 - [QA and assurance](quality/QA_ASSURANCE.md)
+- [Traceability](quality/TRACEABILITY.md)
+- [Release gates](quality/RELEASE_GATES.md)
 
 ## Security
 - [Security and privacy](security/SECURITY_PRIVACY.md)
 
 ## Operations
 - [SLO/SLA](operations/SLO_SLA.md)
+- [Observability](operations/OBSERVABILITY.md)
+
+## Risk and research
+- [Risk register](risk/RISK_REGISTER.md)
+- [Related work](research/RELATED_WORK.md)
+
+## Machine-readable contracts
+- [Sensing result schema](../schemas/sensing-result.schema.json)
+- [Run manifest schema](../schemas/run-manifest.schema.json)
+
+## Templates
+- [Experiment record](../templates/EXPERIMENT_RECORD.md)
+- [Test case](../templates/TEST_CASE.md)
+- [ADR](../templates/ADR.md)
 
 ## Project-wide invariant
 
