@@ -1,0 +1,48 @@
+# Rust
+/target/
+**/*.rs.bk
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE / OS
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# Secrets / local config
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Data / captures / models
+data/raw/
+data/private/
+captures/
+artifacts/
+models/local/
+*.pcap
+*.pcapng
+*.csi
+*.bin
+
+# Coverage / reports
+coverage/
+htmlcov/
+*.lcov
+reports/local/
+
+# Firmware build
+firmware/**/build/
+firmware/**/sdkconfig
