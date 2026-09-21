@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Soturine/echora/schemas/run-manifest.schema.json",
+  "title": "Echora Run Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "started_at",
+    "source_mode",
+    "git_revision",
+    "config_digest",
+    "sensor_ids"
+  ],
+  "properties": {
+    "run_id": { "type": "string", "minLength": 1 },
+    "started_at": { "type": "string", "format": "date-time" },
+    "ended_at": { "type": ["string", "null"], "format": "date-time" },
+    "source_mode": {
+      "type": "string",
+      "enum": ["LIVE", "REPLAY", "SIMULATED"]
+    },
+    "git_revision": { "type": "string", "minLength": 7 },
+    "git_dirty": { "type": "boolean" },
+    "firmware_revision": { "type": ["string", "null"] },
+    "model_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "sha256"],
+        "properties": {
+          "id": { "type": "string" },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          }
+        }
+      }
+    },
+    "config_digest": { "type": "string", "minLength": 1 },
+    "calibration_id": { "type": ["string", "null"] },
+    "sensor_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "environment_id": { "type": ["string", "null"] },
+    "capture_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "random_seeds": {
+      "type": "array",
+      "items": { "type": "integer" }
+    },
+    "metric_definitions": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
