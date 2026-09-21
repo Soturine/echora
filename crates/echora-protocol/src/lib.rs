@@ -30,11 +30,12 @@ pub enum DecodeError {
 
 impl SensorFrame {
     pub fn encode(&self) -> Result<Vec<u8>, DecodeError> {
-        if self.payload.len() > MAX_PAYLOAD_LEN || self.payload.len() > u16::MAX as usize {
+        if self.payload.len() > MAX_PAYLOAD_LEN {
             return Err(DecodeError::PayloadTooLarge);
         }
 
-        let payload_len = u16::try_from(self.payload.len()).map_err(|_| DecodeError::PayloadTooLarge)?;
+        let payload_len =
+            u16::try_from(self.payload.len()).map_err(|_| DecodeError::PayloadTooLarge)?;
         let mut out = Vec::with_capacity(HEADER_LEN + self.payload.len() + CRC_LEN);
 
         out.extend_from_slice(&MAGIC);
@@ -101,8 +102,8 @@ impl SensorFrame {
             node_id: u32::from_le_bytes([bytes[8], bytes[9], bytes[10], bytes[11]]),
             sequence: u32::from_le_bytes([bytes[12], bytes[13], bytes[14], bytes[15]]),
             device_time_us: u64::from_le_bytes([
-                bytes[16], bytes[17], bytes[18], bytes[19],
-                bytes[20], bytes[21], bytes[22], bytes[23],
+                bytes[16], bytes[17], bytes[18], bytes[19], bytes[20], bytes[21], bytes[22],
+                bytes[23],
             ]),
             subcarrier_count: u16::from_le_bytes([bytes[24], bytes[25]]),
             flags: u16::from_le_bytes([bytes[28], bytes[29]]),
@@ -171,6 +172,9 @@ mod tests {
         let mut encoded = frame().encode().unwrap();
         encoded.pop();
 
-        assert_eq!(SensorFrame::decode(&encoded), Err(DecodeError::LengthMismatch));
+        assert_eq!(
+            SensorFrame::decode(&encoded),
+            Err(DecodeError::LengthMismatch)
+        );
     }
 }
