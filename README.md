@@ -26,7 +26,7 @@ A complete-looking visualization is never treated as proof. Echora keeps direct 
 | P5 | Cardiac micro-motion research | independent ECG/PPG/watch reference; experimental until validated |
 | P6 | SpatialTwin integration | RF-derived human state placed in a metric 3D environment with provenance |
 
-**Current repository maturity:** specification / architecture foundation. A capability is not considered implemented merely because it appears in the roadmap or documentation.
+**Current repository maturity:** specification / architecture foundation with a minimal Rust evidence/protocol scaffold. A capability is not considered implemented merely because it appears in the roadmap or documentation.
 
 ## Evidence vocabulary
 
@@ -146,9 +146,19 @@ schemas/        machine-readable contracts and evidence envelopes
 hardware/       BOM, topology, calibration fixtures and setup
 data/           dataset/capture format documentation (not raw personal captures)
 tests/          cross-layer replay, HIL and acceptance harnesses
+templates/      ADR, test and experiment records
 ```
 
 Directories are introduced when their first authoritative artifact or implementation exists; empty architecture is not evidence of implementation.
+
+## Current code foundation
+
+The repository currently includes:
+- `echora-core`: source/evidence/provenance/abstention domain types;
+- `echora-protocol`: bounded v1 binary sensor frame codec with CRC and tests;
+- GitHub Actions for format, clippy and Rust tests.
+
+This is **software foundation only**. Real CSI acquisition, DSP, presence, respiration, localization and pose remain roadmap work until implemented and validated.
 
 ## What Echora will not claim
 
@@ -172,6 +182,7 @@ Start at [docs/README.md](docs/README.md). Important documents include:
 
 - [Product requirements](docs/product/PRD.md)
 - [System architecture](docs/architecture/ARCHITECTURE.md)
+- [Repository structure](docs/engineering/STRUCTURE.md)
 - [Sensing pipeline](docs/engineering/SENSING_PIPELINE.md)
 - [Data and wire contracts](docs/engineering/DATA_AND_PROTOCOL.md)
 - [Experimentation and scientific validation](docs/engineering/EXPERIMENTATION.md)
