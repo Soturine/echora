@@ -20,6 +20,7 @@ If code and documentation disagree, do not silently edit the requirement to matc
 - [System architecture](architecture/ARCHITECTURE.md)
 - [Visualization architecture](architecture/VISUALIZATION_ARCHITECTURE.md)
 - [ADR 0001 — architecture baseline](architecture/adr/0001-architecture-baseline.md)
+- [ADR 0002 — evidence-constrained rendering](architecture/adr/0002-evidence-constrained-rendering.md)
 
 ## Engineering
 - [Stack](engineering/STACK.md)
@@ -54,6 +55,7 @@ If code and documentation disagree, do not silently edit the requirement to matc
 - [Risk register](risk/RISK_REGISTER.md)
 - [Related work](research/RELATED_WORK.md)
 - [Wi-Fi / RF sensing ecosystem survey](research/ECOSYSTEM_SURVEY.md)
+- [Echora vs RuView engineering comparison](research/RUVIEW_COMPARISON.md)
 
 ## Machine-readable contracts
 - [Sensing result schema](../schemas/sensing-result.schema.json)
