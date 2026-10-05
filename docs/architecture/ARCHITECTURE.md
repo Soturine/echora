@@ -194,3 +194,67 @@ Potential services only after evidence:
 - long-term observability stack.
 
 A split must document latency, failure, security and operational trade-offs in an ADR.
+
+
+## RF observation abstraction
+
+Device-specific acquisition is isolated behind adapters:
+
+```text
+ESP-IDF CSI / future WLAN sensing / research NIC / other RF
+                           ↓
+                  RF Observation Model
+                           ↓
+              DSP / calibration / fusion
+```
+
+This prevents the core architecture from becoming synonymous with one ESP32 CSI callback or one vendor packet format.
+
+See:
+- `docs/engineering/CSI_ACQUISITION_AND_HARDWARE_MATRIX.md`
+- `docs/engineering/IEEE_80211BF_COMPATIBILITY.md`
+
+## Capability negotiation
+
+Before exposing a semantic output, runtime evaluates:
+- sensor topology;
+- RF configuration;
+- timing;
+- calibration;
+- signal quality;
+- model compatibility;
+- evidence/maturity level.
+
+The result includes both capability state and a maximum render fidelity. This prevents a functioning UI component from implying that a sensing capability exists.
+
+See `docs/engineering/CAPABILITY_NEGOTIATION.md`.
+
+## Spatial model
+
+Spatial sensing is represented as a progression:
+
+```text
+link activity
+→ occupancy likelihood field
+→ localized volume + uncertainty
+→ track
+→ body extent
+→ articulated pose
+→ dense/RF-inferred representation
+```
+
+Each level has stricter geometry and evidence requirements.
+
+See `docs/engineering/RF_GEOMETRY_AND_FRESNEL_MODEL.md`.
+
+## Coordinate and timing authority
+
+Room/world/reference frames and device/host/aligned time domains are explicit. Multi-node or reference fusion cannot be enabled merely because data timestamps look numerically close.
+
+See `docs/engineering/COORDINATE_FRAMES_AND_TIME_SYNC.md`.
+
+## Evidence-constrained rendering
+
+The UI receives semantic state, uncertainty, evidence metadata and a renderer ceiling. It may reduce fidelity when evidence degrades, but may not increase semantic fidelity on its own.
+
+See `docs/architecture/VISUALIZATION_ARCHITECTURE.md`.
