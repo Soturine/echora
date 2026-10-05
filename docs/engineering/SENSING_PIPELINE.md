@@ -186,3 +186,31 @@ if capability evidence level < visualization requirement:
 ```
 
 Visualization fidelity must never exceed sensing evidence fidelity.
+
+
+## Geometry-aware sensing
+
+For spatial capabilities, signal processing is augmented by an explicit RF geometry model. Link activity may contribute to a spatial likelihood field, but modeled Fresnel/support volumes are not themselves measurements of a person's shape.
+
+See `RF_GEOMETRY_AND_FRESNEL_MODEL.md`.
+
+## Capability negotiation
+
+Semantic outputs are exposed only when runtime requirements are satisfied. A capability can be withheld because of:
+- insufficient topology;
+- missing/invalid calibration;
+- stale node;
+- inadequate signal quality;
+- missing/incompatible model;
+- insufficient evidence level.
+
+The frontend receives a renderer ceiling rather than deciding fidelity from confidence alone.
+
+## Dense representations
+
+Three spatial artifacts remain separate:
+- `CAMERA_RECONSTRUCTED_POINT_CLOUD`;
+- `MULTIMODAL_FUSED_POINT_CLOUD`;
+- `RF_INFERRED_POINT_REPRESENTATION`.
+
+They have different evidence semantics and must never be merged into one unlabeled visualization concept.
