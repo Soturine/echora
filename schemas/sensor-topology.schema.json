@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Soturine/echora/schemas/sensor-topology.schema.json",
+  "title": "Echora Sensor Topology",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["topology_id", "environment_id", "nodes", "links"],
+  "properties": {
+    "topology_id": { "type": "string", "minLength": 1 },
+    "environment_id": { "type": "string", "minLength": 1 },
+    "revision": { "type": "string" },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["node_id", "role", "position_m"],
+        "properties": {
+          "node_id": { "type": "string", "minLength": 1 },
+          "role": {
+            "type": "string",
+            "enum": ["AP", "TRANSMITTER", "RECEIVER", "TRANSCEIVER", "REFERENCE"]
+          },
+          "hardware": { "type": ["string", "null"] },
+          "firmware_version": { "type": ["string", "null"] },
+          "position_m": {
+            "type": "array",
+            "prefixItems": [
+              { "type": "number" },
+              { "type": "number" },
+              { "type": "number" }
+            ],
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "orientation_xyzw": {
+            "type": ["array", "null"],
+            "prefixItems": [
+              { "type": "number" },
+              { "type": "number" },
+              { "type": "number" },
+              { "type": "number" }
+            ],
+            "minItems": 4,
+            "maxItems": 4
+          }
+        }
+      }
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["link_id", "tx_node_id", "rx_node_id"],
+        "properties": {
+          "link_id": { "type": "string", "minLength": 1 },
+          "tx_node_id": { "type": "string", "minLength": 1 },
+          "rx_node_id": { "type": "string", "minLength": 1 },
+          "channel": { "type": ["integer", "null"], "minimum": 1 },
+          "center_frequency_hz": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+          "bandwidth_hz": { "type": ["number", "null"], "exclusiveMinimum": 0 }
+        }
+      }
+    }
+  }
+}
