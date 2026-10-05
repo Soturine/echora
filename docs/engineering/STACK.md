@@ -125,3 +125,46 @@ Not default:
 - LLM in the sensing decision path.
 
 Any of these requires a capability-driven ADR.
+
+
+## Hardware strategy refinement
+
+The initial development target remains ESP32-S3, while C6 and C5 are explicit research follow-ons. Compatibility targets such as C3/classic ESP32 may be admitted for acquisition-lite roles when actual CSI APIs and throughput justify them.
+
+Two firmware profiles are planned:
+- `echora-node-raw` for raw CSI, dataset collection and algorithm research;
+- `echora-node-edge` for validated operational sensing and integrations.
+
+See `CSI_ACQUISITION_AND_HARDWARE_MATRIX.md`.
+
+## Spatial visualization stack
+
+Three.js remains the rendering foundation, but the web stack is organized around evidence-aware scene layers:
+- environment;
+- sensor topology;
+- RF links/Fresnel support;
+- occupancy field;
+- tracks;
+- pose;
+- reference overlays;
+- diagnostics;
+- provenance/evidence overlay.
+
+The renderer consumes capability status and cannot promote semantic detail independently.
+
+## Benchmark and model governance
+
+Python/PyTorch workflows must emit:
+- dataset/split manifests;
+- model cards;
+- exact metric definitions;
+- baseline comparisons;
+- artifact hashes;
+- held-out/OOD results;
+- export/runtime parity evidence.
+
+Public-dataset results and Echora-hardware results remain separate evidence tracks.
+
+## Future sensing standards
+
+The core observation model is intentionally vendor-neutral so future IEEE 802.11bf-capable adapters or other RF sensing backends do not require rewriting domain, calibration, evidence or visualization layers.
