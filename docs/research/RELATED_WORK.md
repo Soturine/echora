@@ -1,6 +1,6 @@
 # Related Work and Engineering Lessons
 
-This file records architectural/research inputs. It is not an endorsement of every claim made by referenced projects.
+This file summarizes lessons. The broader catalog is maintained in [ECOSYSTEM_SURVEY.md](ECOSYSTEM_SURVEY.md).
 
 ## RuView / WiFi-DensePose
 
@@ -25,7 +25,9 @@ Lessons adopted by Echora:
 4. raw CSI and provenance should survive long enough to re-evaluate algorithms;
 5. negative results and retractions are useful engineering evidence;
 6. a single ESP32 is primarily an acquisition/presence/motion research node, not proof of camera-grade pose;
-7. physiological claims require independent references.
+7. physiological claims require independent references;
+8. visualization maturity and sensing maturity must remain separate;
+9. point-cloud provenance must distinguish camera/depth reconstruction, multimodal fusion and RF-only inference.
 
 Echora does **not** copy RuView's capability claims or architecture wholesale. Each capability must earn its own evidence.
 
@@ -33,19 +35,21 @@ Echora does **not** copy RuView's capability claims or architecture wholesale. E
 
 Reference: https://github.com/espressif/esp-csi
 
-Useful as an upstream technical reference for ESP32 CSI acquisition and examples. Device/IDF support must be verified against the version used by Echora rather than assumed from historical examples.
+Useful as an upstream technical reference for ESP32 CSI acquisition, sensing demos and hardware-family experiments. Device/IDF support must be verified against the exact version used by Echora.
 
-## Wi-Fi human-sensing research
+## Other reference families
 
-Relevant research families include:
-- human activity recognition from CSI;
-- device-free localization;
-- respiration/micro-motion sensing;
-- person counting;
-- 2D/3D pose estimation from Wi-Fi;
-- multimodal teacher/reference capture.
-
-Research numbers are only comparable when hardware, bandwidth, antenna count, topology, dataset split and metric definition are comparable.
+The ecosystem survey additionally covers:
+- ESP32-CSI-Tool;
+- ESPectre;
+- CSIKit;
+- SenseFi / CSI benchmarks;
+- Widar-style physics-aware representations;
+- respiration/micro-motion research;
+- Person-in-WiFi / DensePose / RF-Pose;
+- MM-Fi;
+- CSI-to-point-cloud research;
+- IEEE 802.11bf WLAN sensing.
 
 ## Reference-project intake rule
 
