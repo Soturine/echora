@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Soturine/echora/schemas/capability-status.schema.json",
+  "title": "Echora Capability Status",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["capability", "state", "render_fidelity", "reasons"],
+  "properties": {
+    "capability": { "type": "string", "minLength": 1 },
+    "state": {
+      "type": "string",
+      "enum": ["UNAVAILABLE", "AVAILABLE", "DEGRADED", "EXPERIMENTAL", "WITHHELD"]
+    },
+    "render_fidelity": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "SIGNAL_ONLY",
+        "OCCUPANCY_FIELD",
+        "LOCALIZED_VOLUME",
+        "TRACK",
+        "BODY_EXTENT",
+        "SKELETON",
+        "DENSE_BODY",
+        "RF_POINT_REPRESENTATION"
+      ]
+    },
+    "evidence_level": {
+      "type": ["string", "null"],
+      "enum": [null, "L0", "L1", "L2", "L3", "L4", "L5", "L6"]
+    },
+    "reasons": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "rule_version": { "type": ["string", "null"] }
+  }
+}
