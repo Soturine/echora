@@ -29,3 +29,54 @@ jobs:
 
       - name: Test
         run: cargo test --workspace
+
+  contracts:
+    name: Schemas and docs contracts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON syntax
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          schemas = sorted(Path("schemas").glob("*.json"))
+          if not schemas:
+              raise SystemExit("no schemas found")
+
+          for path in schemas:
+              with path.open(encoding="utf-8") as fh:
+                  data = json.load(fh)
+              if "$schema" not in data or "$id" not in data:
+                  raise SystemExit(f"{path}: missing $schema or $id")
+              print(f"validated {path}")
+          PY
+
+      - name: Reject broken local markdown targets
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+
+          roots = [Path("README.md"), Path("docs")]
+          files = [Path("README.md")] + list(Path("docs").rglob("*.md"))
+          broken = []
+
+          for md in files:
+              text = md.read_text(encoding="utf-8")
+              for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)', text):
+                  if "://" in target or target.startswith("#") or target.startswith("mailto:"):
+                      continue
+                  path = target.split("#", 1)[0]
+                  if not path:
+                      continue
+                  resolved = (md.parent / path).resolve()
+                  if not resolved.exists():
+                      broken.append(f"{md}: {target}")
+
+          if broken:
+              raise SystemExit("broken local links:\n" + "\n".join(broken))
+          print(f"checked {len(files)} markdown files")
+          PY
