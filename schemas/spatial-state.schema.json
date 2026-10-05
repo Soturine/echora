@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Soturine/echora/schemas/spatial-state.schema.json",
+  "title": "Echora Spatial State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "object_id",
+    "frame_id",
+    "render_fidelity",
+    "source_mode",
+    "evidence_kind",
+    "observed_at"
+  ],
+  "properties": {
+    "object_id": { "type": "string", "minLength": 1 },
+    "track_id": { "type": ["string", "null"] },
+    "frame_id": { "type": "string", "minLength": 1 },
+    "render_fidelity": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "SIGNAL_ONLY",
+        "OCCUPANCY_FIELD",
+        "LOCALIZED_VOLUME",
+        "TRACK",
+        "BODY_EXTENT",
+        "SKELETON",
+        "DENSE_BODY",
+        "RF_POINT_REPRESENTATION"
+      ]
+    },
+    "source_mode": {
+      "type": "string",
+      "enum": ["LIVE", "REPLAY", "SIMULATED"]
+    },
+    "evidence_kind": {
+      "type": "string",
+      "enum": [
+        "MEASURED",
+        "CALIBRATED",
+        "RECONSTRUCTED",
+        "INFERRED",
+        "GENERATED",
+        "SIMULATED",
+        "REFERENCE"
+      ]
+    },
+    "position_m": {
+      "type": ["array", "null"],
+      "prefixItems": [
+        { "type": "number" },
+        { "type": "number" },
+        { "type": "number" }
+      ],
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "covariance_3x3": {
+      "type": ["array", "null"],
+      "items": { "type": "number" },
+      "minItems": 9,
+      "maxItems": 9
+    },
+    "confidence": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "sensor_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "calibration_id": { "type": ["string", "null"] },
+    "model_id": { "type": ["string", "null"] },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "fresh_until": { "type": ["string", "null"], "format": "date-time" }
+  }
+}
