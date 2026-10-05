@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Soturine/echora/schemas/calibration.schema.json",
+  "title": "Echora Calibration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calibration_id",
+    "calibration_type",
+    "environment_id",
+    "topology_id",
+    "state",
+    "created_at"
+  ],
+  "properties": {
+    "calibration_id": { "type": "string", "minLength": 1 },
+    "calibration_type": {
+      "type": "string",
+      "enum": ["ACQUISITION", "ENVIRONMENT_BASELINE", "GEOMETRY", "CAPABILITY"]
+    },
+    "environment_id": { "type": "string", "minLength": 1 },
+    "topology_id": { "type": "string", "minLength": 1 },
+    "sensor_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "firmware_version": { "type": ["string", "null"] },
+    "protocol_version": { "type": ["string", "null"] },
+    "algorithm_version": { "type": ["string", "null"] },
+    "input_capture_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "quality_metrics": { "type": "object" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "valid_until": { "type": ["string", "null"], "format": "date-time" },
+    "state": {
+      "type": "string",
+      "enum": ["VALID", "DEGRADED", "STALE", "INVALID", "UNKNOWN"]
+    },
+    "invalidation_reason": { "type": ["string", "null"] }
+  }
+}
