@@ -112,6 +112,36 @@ Web dashboard / Three.js / SpatialTwin
 
 Baseline stack decisions and alternatives are documented under [docs/engineering/STACK.md](docs/engineering/STACK.md).
 
+## What makes Echora different
+
+Echora is not designed to make Wi-Fi look like a camera. Its 3D interface is an **evidence-constrained spatial instrument**.
+
+The visualization progresses only as the evidence permits:
+
+```text
+raw CSI
+→ signal diagnostics
+→ RF link activity
+→ occupancy likelihood field
+→ localized volume + uncertainty
+→ track
+→ body extent
+→ skeleton
+→ dense RF-inferred representation
+```
+
+A topology-aware **Capability Negotiator** defines the maximum render fidelity. If geometry, calibration, signal quality, model compatibility or evidence is insufficient, the UI reduces fidelity or withholds the result instead of inventing detail.
+
+The planned 3D views include:
+- **RF Lab** — AP/nodes, links, geometry and Fresnel-inspired support;
+- **Signal View** — amplitude/phase, waterfalls, spectra and timing quality;
+- **Radar / Occupancy View** — 3D likelihood/uncertainty volumes;
+- **Track View** — centroid, covariance and trajectory;
+- **Human / Pose View** — gated keypoints/skeleton;
+- **Reference View** — research-only Kinect/RGB-D/camera comparison.
+
+See [Visualization Architecture](docs/architecture/VISUALIZATION_ARCHITECTURE.md), [Capability Negotiation](docs/engineering/CAPABILITY_NEGOTIATION.md) and [RuView Comparison](docs/research/RUVIEW_COMPARISON.md).
+
 ## Engineering model
 
 This repository follows the **Derivanta / Engineering Constitution** principles used across Soturine engineering work:
@@ -182,6 +212,12 @@ Start at [docs/README.md](docs/README.md). Important documents include:
 
 - [Product requirements](docs/product/PRD.md)
 - [System architecture](docs/architecture/ARCHITECTURE.md)
+- [3D visualization architecture](docs/architecture/VISUALIZATION_ARCHITECTURE.md)
+- [RF geometry and Fresnel model](docs/engineering/RF_GEOMETRY_AND_FRESNEL_MODEL.md)
+- [Capability negotiation](docs/engineering/CAPABILITY_NEGOTIATION.md)
+- [Hardware/CSI matrix](docs/engineering/CSI_ACQUISITION_AND_HARDWARE_MATRIX.md)
+- [Ecosystem survey](docs/research/ECOSYSTEM_SURVEY.md)
+- [RuView comparison](docs/research/RUVIEW_COMPARISON.md)
 - [Repository structure](docs/engineering/STRUCTURE.md)
 - [Sensing pipeline](docs/engineering/SENSING_PIPELINE.md)
 - [Data and wire contracts](docs/engineering/DATA_AND_PROTOCOL.md)
